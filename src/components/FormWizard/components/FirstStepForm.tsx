@@ -8,9 +8,11 @@ import {
   InputsFormTypes,
   FormDataTypes,
 } from "../types";
+import { useLocalStorageHistoryLogic } from "./useLocalStorageHistoryLogic";
+
+import { LocalStorageHistory } from "./LocalStorageHistory";
 
 type stepOne = Omit<InputsFormTypes, "birthDate" | "hobby">;
-
 type Props = {
   handleNextPage: () => void;
   data: InputsFormTypes;
@@ -27,11 +29,16 @@ export const FirstStepForm = ({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FirstStep>({
     resolver: zodResolver(firstStepFormValidationSchema),
     defaultValues: data,
   });
+  const watchedName = watch("name");
+
+  const { getItem, nameHistory, handleGetItem, handleNameBlur } =
+    useLocalStorageHistoryLogic(watchedName);
 
   const handleFirstStepForm: SubmitHandler<FirstStep> = (formData) => {
     handleNextPage();
@@ -43,27 +50,41 @@ export const FirstStepForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFirstStepForm)}>
-      <div className="py-4">
-        <Input
-          className="border-ring-1-rounded-sm"
-          label={inputs.name}
-          {...register("name", { required: true })}
-          error={errors.name}
-          mandatory
-        />
-      </div>
-      <div>
-        <Input
-          label={inputs.lastName}
-          {...register("lastName", { required: true })}
-          error={errors.lastName}
-          mandatory
-        />
-      </div>
-      <div className="mt-2 flex justify-end">
-        <Button label="Next step" />
-      </div>
-    </form>
+    <>
+      <form onSubmit={handleSubmit(handleFirstStepForm)}>
+        <div className="py-4">
+          <Input
+            className="border-ring-1-rounded-sm"
+            label={inputs.name}
+            {...register("name", { required: true })}
+            error={errors.name}
+            onBlur={handleNameBlur}
+            mandatory
+          />
+        </div>
+        <div>
+          <Input
+            label={inputs.lastName}
+            {...register("lastName", { required: true })}
+            error={errors.lastName}
+            mandatory
+          />
+        </div>
+        <div className="mt-2 flex justify-end">
+          <Button label="Next step" />
+        </div>
+      </form>
+      {!getItem && (
+        <>
+          <hr className="my-5" />
+          <Button
+            onClick={handleGetItem}
+            className="cursor-pointer"
+            label="pobierz historię"
+          />
+        </>
+      )}
+      {getItem && <LocalStorageHistory item={nameHistory} />}
+    </>
   );
 };

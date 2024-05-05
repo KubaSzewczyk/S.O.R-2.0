@@ -1,5 +1,5 @@
 import "./App.css";
-// import { RegistrationFormRefsHookForm } from "./components/RegistrationForm";
+// import { RegistrationFormRefsHookForm, RegistrationFormState, RegistrationFormRefs } from "./components/RegistrationForm";
 // import { ComponentGenerator } from "./components/ComponentGenerator";
 import { FormWizard } from "./components/FormWizard";
 
