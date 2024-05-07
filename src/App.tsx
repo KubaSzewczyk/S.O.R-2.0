@@ -3,7 +3,9 @@ import "./App.css";
 // import { ComponentGenerator } from "./components/ComponentGenerator";
 // import { FormWizard } from "./components/FormWizard";
 // import { DynamicFieldsForm } from "./components/DynamicFieldsForm";
-import { SortedObj } from "./components/SortedObj";
+// import { SortedObj } from "./components/SortedObj";
+import { ThemeRepresentative } from "./components/Theme";
+import { ThemeContextProvider } from "./context/ThemeContext";
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
       {/* <ComponentGenerator /> */}
       {/* <FormWizard /> */}
       {/* <DynamicFieldsForm /> */}
-      <SortedObj />
+      {/* <SortedObj /> */}
+      <ThemeContextProvider>
+        <ThemeRepresentative />
+      </ThemeContextProvider>
     </>
   );
 }
