@@ -7,14 +7,15 @@ const users = [
   { id: 2, nickname: "olivier", age: 32 },
   { id: 3, nickname: "macgyver", age: 65 },
 ];
+type SortByOptions = "id" | "nickname" | "age";
 
 export const SortedObj = () => {
-  const [sortBy, setSortBy] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [sortBy, setSortBy] = useState<SortByOptions>("id");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const sortedUsers = useSortData(users, sortBy, sortOrder);
 
-  const handleSortByChange = (value) => {
+  const handleSortByChange = (value: SortByOptions) => {
     setSortBy(value);
   };
 
@@ -26,7 +27,7 @@ export const SortedObj = () => {
     <div>
       <div>
         <Select
-          data={Object.keys(users[0])}
+          data={Object.keys(users[0]) as SortByOptions[]}
           value={sortBy}
           onChange={handleSortByChange}
         />
