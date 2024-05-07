@@ -11,6 +11,12 @@ export default {
       },
       colors: {
         "wa-blue": "#184689",
+        "mex-red": "#C8102E",
+        "mex-green": "#006341",
+        "fra-red": "#ED2939",
+        "fra-blue": "#002654",
+        "ger-red": "#DD0000",
+        "ger-yellow": "#FFCC00",
       },
     },
   },
