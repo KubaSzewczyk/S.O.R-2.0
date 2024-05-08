@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { formattedTimestamp } from "../../../utills/dateHelpers";
 
 export const useLocalStorageHistoryLogic = (watchedName: string) => {
-  console.log(watchedName, "watchedName");
   const [nameHistory, setNameHistory] = useState<
     { value: string; timestamp: string }[]
   >([]);
