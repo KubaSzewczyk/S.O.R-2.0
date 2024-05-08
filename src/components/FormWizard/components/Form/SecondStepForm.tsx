@@ -1,20 +1,21 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type Dispatch, type SetStateAction } from "react";
 
-import { Button, Input } from "../../../ui";
+import { Button, Input } from "../../../../ui";
 import {
   SecondStep,
   secondStepFormValidationSchema,
-  FormDataTypes,
   InputsFormTypes,
-} from "../types";
+  UserData,
+} from "../../types";
 
 type StepTwo = Omit<InputsFormTypes, "name" | "lastName">;
 
 type Props = {
   handleNextPage: () => void;
   handlePrevPage: () => void;
-  setData: ({ birthDate, hobby }: FormDataTypes) => void;
+  setData: Dispatch<SetStateAction<UserData>>;
   data: DataType;
   inputs: StepTwo;
 };
@@ -41,11 +42,11 @@ export const SecondStepForm = ({
   });
 
   const handleSecondStepForm: SubmitHandler<SecondStep> = (formData) => {
-    setData({
-      ...data,
+    setData((prevState) => ({
+      ...prevState,
       birthDate: formData.birthDate,
       hobby: formData.hobby,
-    });
+    }));
     handleNextPage();
   };
 

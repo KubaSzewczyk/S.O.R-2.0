@@ -3,7 +3,7 @@ import { type ComponentProps } from "react";
 import { cn } from "../../utills/cn";
 
 type Props = {
-  children: string;
+  children: string | string[];
   themeInfo?: string;
 } & ComponentProps<"p">;
 
