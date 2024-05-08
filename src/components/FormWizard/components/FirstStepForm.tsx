@@ -1,21 +1,20 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type Dispatch, type SetStateAction } from "react";
 
 import { Button, Input } from "../../../ui";
 import {
   FirstStep,
   firstStepFormValidationSchema,
   InputsFormTypes,
-  FormDataTypes,
 } from "../types";
 
 type stepOne = Omit<InputsFormTypes, "birthDate" | "hobby">;
-
 type Props = {
   handleNextPage: () => void;
   data: InputsFormTypes;
   inputs: stepOne;
-  setData: ({ name, lastName }: FormDataTypes) => void;
+  setData: Dispatch<SetStateAction<InputsFormTypes>>;
 };
 
 export const FirstStepForm = ({
