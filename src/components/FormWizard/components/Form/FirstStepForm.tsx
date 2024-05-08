@@ -1,23 +1,24 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type Dispatch, type SetStateAction } from "react";
 
-import { Button, Input } from "../../../ui";
+import { Button, Input } from "../../../../ui";
 import {
   FirstStep,
   firstStepFormValidationSchema,
   InputsFormTypes,
-  FormDataTypes,
-} from "../types";
-import { useLocalStorageHistoryLogic } from "./useLocalStorageHistoryLogic";
+  UserData,
+} from "../../types";
+// import { useLocalStorageHistoryLogic } from "./useLocalStorageHistoryLogic";
 
-import { LocalStorageHistory } from "./LocalStorageHistory";
+// import { LocalStorageHistory } from "./LocalStorageHistory";
 
 type stepOne = Omit<InputsFormTypes, "birthDate" | "hobby">;
 type Props = {
   handleNextPage: () => void;
-  data: InputsFormTypes;
+  data: UserData;
   inputs: stepOne;
-  setData: ({ name, lastName }: FormDataTypes) => void;
+  setData: Dispatch<SetStateAction<UserData>>;
 };
 
 export const FirstStepForm = ({
@@ -29,16 +30,16 @@ export const FirstStepForm = ({
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<FirstStep>({
     resolver: zodResolver(firstStepFormValidationSchema),
     defaultValues: data,
   });
-  const watchedName = watch("name");
+  // const watchedName = watch("name");
 
-  const { getItem, nameHistory, handleGetItem, handleNameBlur } =
-    useLocalStorageHistoryLogic(watchedName);
+  // const { getItem, nameHistory, handleGetItem, handleNameBlur } =
+  // useLocalStorageHistoryLogic(watchedName);
 
   const handleFirstStepForm: SubmitHandler<FirstStep> = (formData) => {
     handleNextPage();
@@ -58,7 +59,7 @@ export const FirstStepForm = ({
             label={inputs.name}
             {...register("name", { required: true })}
             error={errors.name}
-            onBlur={handleNameBlur}
+            // onBlur={handleNameBlur}
             mandatory
           />
         </div>
@@ -74,7 +75,7 @@ export const FirstStepForm = ({
           <Button label="Next step" />
         </div>
       </form>
-      {!getItem && (
+      {/* {!getItem && (
         <>
           <hr className="my-5" />
           <Button
@@ -84,7 +85,7 @@ export const FirstStepForm = ({
           />
         </>
       )}
-      {getItem && <LocalStorageHistory item={nameHistory} />}
+      {getItem && <LocalStorageHistory item={nameHistory} />} */}
     </>
   );
 };

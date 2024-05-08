@@ -22,6 +22,19 @@ export type FormDataTypes = {
   lastName?: string;
   birthDate?: string;
   hobby?: string;
+  id?: string;
+};
+
+export type UserData = {
+  name: string;
+  lastName: string;
+  birthDate: string;
+  hobby: string;
+  id: string;
+};
+
+export type State = {
+  users: UserData[];
 };
 
 export type FirstStep = z.infer<typeof firstStepFormValidationSchema>;
