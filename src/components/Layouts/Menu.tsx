@@ -45,6 +45,9 @@ export const Menu = () => {
           <li className="mr-2">
             <WaNavLink to={routes.THEME_REPRESENTATIVE.path}>Theme</WaNavLink>
           </li>
+          <li className="mr-2">
+            <WaNavLink to={routes.STEPPER.path}>Stepper</WaNavLink>
+          </li>
         </ul>
       </nav>
     </div>

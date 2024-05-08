@@ -6,6 +6,7 @@ import { ComponentGenerator } from "./components/ComponentGenerator";
 import { FormWizardPage } from "./components/pages/FormWizardPage";
 import { GeneratorPage } from "./components/pages/GeneratorPage";
 import { ThemeRepresentative } from "./components/Theme";
+import { Stepper } from "./components/Stepper";
 
 export const routes = {
   HOME: {
@@ -25,6 +26,9 @@ export const routes = {
   },
   THEME_REPRESENTATIVE: {
     path: "/theme-representative",
+  },
+  STEPPER: {
+    path: "/stepper",
   },
 };
 
@@ -60,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: routes.THEME_REPRESENTATIVE.path,
         element: <ThemeRepresentative />,
+      },
+      {
+        path: routes.STEPPER.path,
+        element: <Stepper />,
       },
     ],
   },
