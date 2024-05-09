@@ -1,7 +1,7 @@
-import { UserData } from "../types";
-
 import { RemoveUser, EditIcon } from "../Icons/";
 import { Text } from "../../../ui";
+
+import type { UserData } from "../types";
 
 interface Props {
   usersList: UserData[];
