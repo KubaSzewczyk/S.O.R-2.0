@@ -63,11 +63,13 @@ export const FormWizard = () => {
         />
       )}
 
-      <UsersList
-        handleRemoveUser={handleRemoveUser}
-        handleEditUser={handleEditUser}
-        usersList={users}
-      />
+      {users.length > 0 && (
+        <UsersList
+          handleRemoveUser={handleRemoveUser}
+          handleEditUser={handleEditUser}
+          usersList={users}
+        />
+      )}
     </div>
   );
 };
