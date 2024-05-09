@@ -7,6 +7,7 @@ import { FormWizardPage } from "./components/pages/FormWizardPage";
 import { GeneratorPage } from "./components/pages/GeneratorPage";
 import { ThemeRepresentative } from "./components/Theme";
 import { Stepper } from "./components/Stepper";
+import { EditForm, UsersList } from "./components/FormWizard/components";
 
 export const routes = {
   HOME: {
@@ -29,6 +30,12 @@ export const routes = {
   },
   STEPPER: {
     path: "/stepper",
+  },
+  EDIT_USER: {
+    path: "/edit-user",
+  },
+  USERS_LIST: {
+    path: "/users-list",
   },
 };
 
@@ -68,6 +75,14 @@ export const router = createBrowserRouter([
       {
         path: routes.STEPPER.path,
         element: <Stepper />,
+      },
+      {
+        path: routes.EDIT_USER.path,
+        element: <EditForm />,
+      },
+      {
+        path: routes.USERS_LIST.path,
+        element: <UsersList />,
       },
     ],
   },

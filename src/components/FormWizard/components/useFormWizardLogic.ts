@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../../hooks/redux";
 import { useAppSelector } from "../../../hooks/redux";
 import { addUser, removeUser, editUser } from "../usersSlice";
+import { userToEdit } from "../userSlice";
 
 import type { UserData } from "../types";
 
@@ -17,6 +19,8 @@ export const useFormWizardLogic = () => {
     id: "",
   });
 
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.users);
 
@@ -27,12 +31,15 @@ export const useFormWizardLogic = () => {
 
   const handleRemoveUser = (user: UserData) => dispatch(removeUser(user));
 
-  const handleSaveUser = (user: UserData) => dispatch(editUser(user));
+  const handleSaveUser = (user: UserData) => {
+    dispatch(editUser(user));
+    navigate("/form-wizard");
+  };
 
   const handleEditUser = (index: number) => {
     const selectedUserData = users[index];
-    setFormData(selectedUserData);
-    setPage(0);
+    dispatch(userToEdit(selectedUserData));
+    navigate("/edit-user");
   };
 
   const handleNextPage = () => setPage(page + 1);
@@ -48,6 +55,12 @@ export const useFormWizardLogic = () => {
     hobby: "Hobby",
   };
 
+  useEffect(() => {
+    if (users.length === 0) {
+      navigate("/form-wizard");
+    }
+  }, [users]);
+
   return {
     FIRST_STEP_INPUTS,
     SECOND_STEP_INPUTS,
@@ -55,6 +68,7 @@ export const useFormWizardLogic = () => {
     data,
     users,
     setPage,
+    navigate,
     setFormData,
     handleAddUser,
     handleRemoveUser,

@@ -1,24 +1,17 @@
-import { RemoveUser, EditIcon } from "../Icons/";
 import { Text } from "../../../ui";
+import { RemoveUser, EditIcon } from "../Icons/";
+
+import { useFormWizardLogic } from "./useFormWizardLogic";
 
 import type { UserData } from "../types";
 
-interface Props {
-  usersList: UserData[];
-  handleRemoveUser: (user: UserData) => void;
-  handleEditUser: (index: number) => void;
-}
-
-export const UsersList = ({
-  usersList,
-  handleRemoveUser,
-  handleEditUser,
-}: Props) => {
+export const UsersList = () => {
+  const { users, handleRemoveUser, handleEditUser } = useFormWizardLogic();
   return (
     <>
       <div className="mt-4">
         <h2>Lista uzytkowników:</h2>
-        {usersList.map((user: UserData, index) => {
+        {users.map((user: UserData, index) => {
           const { name, lastName } = user;
           return (
             <div key={user.name} className="flex items-center justify-center">
