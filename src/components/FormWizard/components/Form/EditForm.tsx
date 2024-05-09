@@ -1,18 +1,10 @@
-import { type Dispatch, type SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button, Input } from "../../../../ui";
-import { UserData } from "../../types";
+import { useFormWizardLogic } from "../useFormWizardLogic";
+import { useAppSelector } from "../../../../hooks/redux";
 
-type stepOne = Omit<UserData, "birthDate" | "hobby" | "id">;
-
-type Props = {
-  data: UserData;
-  setFormData: Dispatch<SetStateAction<UserData>>;
-  handleSaveUser: (user: UserData) => void;
-  setPage: Dispatch<SetStateAction<number>>;
-  inputs: stepOne;
-};
+import type { UserData } from "../../types";
 
 const defaultValues: UserData = {
   name: "",
@@ -22,15 +14,12 @@ const defaultValues: UserData = {
   id: "",
 };
 
-export const EditForm = ({
-  data,
-  setFormData,
-  handleSaveUser,
-  setPage,
-  inputs,
-}: Props) => {
+export const EditForm = () => {
+  const { data, navigate, setFormData, handleSaveUser, FIRST_STEP_INPUTS } =
+    useFormWizardLogic();
+  const user = useAppSelector((state) => state.userToEdit.editedUser);
   const { register, handleSubmit } = useForm({
-    defaultValues: data,
+    defaultValues: user[0],
   });
 
   const handleSave = (formData: UserData) => {
@@ -41,7 +30,7 @@ export const EditForm = ({
     });
     handleSaveUser(formData);
     Object.keys(data).forEach(() => setFormData(defaultValues));
-    setPage(1);
+    navigate("/form-wizard");
   };
 
   return (
@@ -49,14 +38,14 @@ export const EditForm = ({
       <div className="py-4">
         <Input
           className="border-ring-1-rounded-sm"
-          label={inputs.name}
+          label={FIRST_STEP_INPUTS.name}
           {...register("name", { required: true })}
           mandatory
         />
       </div>
       <div>
         <Input
-          label={inputs.lastName}
+          label={FIRST_STEP_INPUTS.lastName}
           {...register("lastName", { required: true })}
           mandatory
         />

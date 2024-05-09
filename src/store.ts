@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import usersReducer from "./components/FormWizard/usersSlice";
+import editedUser from "./components/FormWizard/userSlice";
 
 export const store = configureStore({
   reducer: {
-    // posts: postsReducer,
-    // comments: commentsReducer,
     users: usersReducer,
+    userToEdit: editedUser,
   },
 });
 

@@ -1,10 +1,5 @@
-import {
-  FirstStepForm,
-  SecondStepForm,
-  Summary,
-  UsersList,
-  EditForm,
-} from "./components";
+import { FirstStepForm, SecondStepForm, Summary } from "./components";
+import { Button } from "../../ui";
 
 import { useFormWizardLogic } from "./components/useFormWizardLogic";
 
@@ -16,26 +11,15 @@ export const FormWizard = () => {
     data,
     users,
     setPage,
+    navigate,
     setFormData,
     handleAddUser,
-    handleEditUser,
     handleNextPage,
     handlePrevPage,
-    handleRemoveUser,
-    handleSaveUser,
   } = useFormWizardLogic();
 
   return (
     <div className="max-w-sm h-30 rounded overflow-hidden shadow-lg p-2 flex-1">
-      {page === 0 && (
-        <EditForm
-          setPage={setPage}
-          setFormData={setFormData}
-          handleSaveUser={handleSaveUser}
-          data={data}
-          inputs={FIRST_STEP_INPUTS}
-        />
-      )}
       {page === 1 && (
         <FirstStepForm
           handleNextPage={handleNextPage}
@@ -62,12 +46,10 @@ export const FormWizard = () => {
           data={data}
         />
       )}
-
       {users.length > 0 && (
-        <UsersList
-          handleRemoveUser={handleRemoveUser}
-          handleEditUser={handleEditUser}
-          usersList={users}
+        <Button
+          label="lista uzytkowników"
+          onClick={() => navigate("/users-list")}
         />
       )}
     </div>
