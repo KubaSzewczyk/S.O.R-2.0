@@ -3,7 +3,7 @@ import { type Dispatch, type SetStateAction } from "react";
 
 import { Text, Button } from "../../../../ui";
 
-import { InputsFormTypes, UserData } from "../../types";
+import type { InputsFormTypes, UserData } from "../../types";
 
 type Props = {
   setPage: Dispatch<SetStateAction<number>>;
